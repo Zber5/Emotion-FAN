@@ -46,6 +46,3 @@ RUN conda install -y -c pytorch \
  && conda clean -ya
 
 RUN pip install opencv-python
-
-# Set the default command to python3
-CMD ["python3"]
