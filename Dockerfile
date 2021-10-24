@@ -45,10 +45,7 @@ RUN conda install -y -c pytorch \
     "torchvision=0.6.0=py38_cu102" \
  && conda clean -ya
 
-RUN pip install dlib
 RUN pip install opencv-python
-RUN pip install numpy
-RUN pip install pillow
 
 # Set the default command to python3
 CMD ["python3"]
