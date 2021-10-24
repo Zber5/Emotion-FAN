@@ -8,20 +8,15 @@ RUN apt-get update && apt-get install -y \
     git \
     bzip2 \
     libx11-6 \
+    ffmpeg \
+    cmake \
+    libboost-python-dev \
  && rm -rf /var/lib/apt/lists/*
-
-# Install system lib required packages
-# install ffmpeg
-RUN apt-get update
-RUN apt-get install ffmpeg
-
-# install dlib
-RUN apt-get install cmake
-RUN apt-get install libboost-python-dev
 
 # Create a working directory
 RUN mkdir /app
 WORKDIR /app
+COPY . .
 
 # Create a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user \
@@ -52,6 +47,8 @@ RUN conda install -y -c pytorch \
 
 RUN pip install dlib
 RUN pip install opencv-python
+RUN pip install numpy
+RUN pip install pillow
 
 # Set the default command to python3
 CMD ["python3"]
