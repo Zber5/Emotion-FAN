@@ -20,7 +20,7 @@ def main():
     args = parser.parse_args()
     best_acc = 0
     at_type = ['self-attention', 'self_relation-attention'][args.at_type]
-    logger = util.Logger('./log/','fan_ckplus')
+
     logger.print('The attention method is {:}, learning rate: {:}'.format(at_type, args.lr))
     ''' Load data '''
     video_root = './data/face/ck_face'
@@ -58,7 +58,7 @@ def main():
 
         lr_scheduler.step()
         logger.print("epoch: {:} learning rate:{:}".format(epoch+1, optimizer.param_groups[0]['lr']))
-        
+
 def train(train_loader, model, optimizer, epoch):
     losses = util.AverageMeter()
     topframe = util.AverageMeter()
@@ -166,4 +166,5 @@ def val(val_loader, model, at_type):
         return topVideo.avg
 
 if __name__ == '__main__':
+    logger = util.Logger('./log/','fan_ckplus')
     main()

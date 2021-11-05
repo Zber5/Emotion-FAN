@@ -1,0 +1,2 @@
+05-Nov-2021-02-14-13 --- args ---
+baseline ck+ dataset, learning rate: 0.1

@@ -7,7 +7,11 @@ import torch.nn.functional as F
 import torch.backends.cudnn as cudnn
 import torchvision.models as models
 from basic_code import load, util, networks
-DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+# DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cpu")
+
+
 def main():
     parser = argparse.ArgumentParser(description='PyTorch Frame Attention Network Training')
     parser.add_argument('--epochs', default=60, type=int, metavar='N',
@@ -19,22 +23,27 @@ def main():
                         help='evaluate model on validation set')
     args = parser.parse_args()
     best_acc = 0
-    logger = util.Logger('./log/','baseline_ckplus')
-    
+
+
     ''' Load data '''
     video_root = './data/face/ck_face'
     video_list = './data/txt/CK+_10-fold_sample_IDascendorder_step10.txt'
-    batchsize_train= 48
+    # batchsize_train= 48
+    batchsize_train= 8
     batchsize_eval= 64
     train_loader, val_loader = load.ckplus_faces_baseline(video_root, video_list, args.fold, batchsize_train, batchsize_eval)
     ''' Load model '''
     _structure = models.resnet18(num_classes=7)
     _parameterDir = './pretrain_model/Resnet18_FER+_pytorch.pth.tar'
+
     model = load.model_parameters(_structure, _parameterDir)
+
+    model = model.to(DEVICE)
+
     ''' Loss & Optimizer '''
     optimizer = torch.optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), args.lr, momentum=0.9, weight_decay=1e-4)
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.2)
-    cudnn.benchmark = True
+    # cudnn.benchmark = True
     ''' Train & Eval '''
     if args.evaluate == True:
         logger.print('args.evaluate: {:}', args.evaluate)
@@ -72,10 +81,11 @@ def train(train_loader, model, optimizer, epoch):
         target_var = target_var.to(DEVICE)
         input_var = input_var.to(DEVICE)
         # model
+        model = model.to(DEVICE)
         pred_score = model(input_var)
         loss = F.cross_entropy(pred_score, target_var).sum()
-        
-        output_store_soft.append(F.softmax(pred_score, dim=1))
+
+        output_store_soft.append(F.softmax(pred_score, dim=1)) # output of resnet
         target_store.append(target_var)
         index_vector.append(index)
         # measure accuracy and record loss
@@ -152,4 +162,6 @@ def val(train_loader, model):
     return topVideoSoft.avg
 
 if __name__ == '__main__':
+    logger = util.Logger('./log/', 'baseline_ckplus')
+
     main()

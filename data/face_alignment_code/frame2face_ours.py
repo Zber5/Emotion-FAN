@@ -12,14 +12,12 @@ def main(frame_dir, face_dir, n_thread):
     predictor_path      = './lib/shape_predictor_5_face_landmarks.dat'
     cnn_face_detector   = './lib/mmod_human_face_detector.dat'
     for category in os.listdir(frame_dir):
-        category_dir = os.path.join(frame_dir, category)
-        for frame_file in os.listdir(category_dir):
-            frame_root_folder = os.path.join(category_dir, frame_file)
-            face_root_folder = frame_root_folder.replace(frame_dir, face_dir)
+        frame_root_folder = os.path.join(frame_dir, category)
+        face_root_folder = frame_root_folder.replace(frame_dir, face_dir)
 
-            if os.path.isdir(frame_root_folder):
-                makefile(face_root_folder)
-                threads.append(threadFun(frame2face, (func_path, predictor_path, frame_root_folder, face_root_folder, cnn_face_detector)))
+        if os.path.isdir(frame_root_folder):
+            makefile(face_root_folder)
+            threads.append(threadFun(frame2face, (func_path, predictor_path, frame_root_folder, face_root_folder, cnn_face_detector)))
 
     run_threads(threads, n_thread)
     print('all is over')
@@ -55,7 +53,7 @@ def frame2face(func_path, predictor_path, image_root_folder, save_root_folder, c
     subprocess.getstatusoutput(linux_command)
     
 if __name__ == '__main__':
-    frame_dir_ckplus = '../frame/cohn-kanade-images'
-    face_dir_ckplus  = '../face/ck_face'
+    frame_dir_ckplus = 'C:/Users/Zber/Desktop/Emotion_frame'
+    face_dir_ckplus  = 'C:/Users/Zber/Desktop/Emotion_face'
     main(frame_dir_ckplus, face_dir_ckplus, n_thread=10)
 

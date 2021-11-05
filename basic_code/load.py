@@ -131,6 +131,12 @@ def model_parameters(_structure, _parameterDir):
             model_state_dict[key.replace('module.', '')] = pretrained_state_dict[key]
 
     _structure.load_state_dict(model_state_dict)
-    model = torch.nn.DataParallel(_structure).cuda()
+
+    # CPU
+    device = torch.device("cpu")
+    model = _structure.to(device)
+
+    # GPU
+    # model = torch.nn.DataParallel(_structure).cuda()
 
     return model

@@ -8,3 +8,7 @@
 *.pyc
 *.cfg
 !.gitignore
+pretrain_model
+ck_face.zip
+.DS_Store
+model

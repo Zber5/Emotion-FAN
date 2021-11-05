@@ -1,0 +1,30 @@
+03-Nov-2021-03-45-27 --- args ---
+baseline ck+ dataset, learning rate: 0.1
+Epoch: [  0][  0/115]	Loss 1.9133 (1.9133)	Acc_Iter@1 31.250 (31.250)	
+ *Acc@Video_soft 100.000   *Acc@Frame 80.634 
+ *Acc@Video 90.909 
+better model!
+epoch: 1 learning rate:0.1
+Epoch: [  1][  0/115]	Loss 0.3387 (0.3387)	Acc_Iter@1 87.500 (87.500)	
+ *Acc@Video_soft 100.000   *Acc@Frame 88.696 
+ *Acc@Video 90.909 
+epoch: 2 learning rate:0.1
+Epoch: [  2][  0/115]	Loss 0.2047 (0.2047)	Acc_Iter@1 93.750 (93.750)	
+ *Acc@Video_soft 100.000   *Acc@Frame 92.862 
+ *Acc@Video 77.273 
+epoch: 3 learning rate:0.1
+Epoch: [  3][  0/115]	Loss 0.1244 (0.1244)	Acc_Iter@1 97.917 (97.917)	
+ *Acc@Video_soft 100.000   *Acc@Frame 94.094 
+ *Acc@Video 86.364 
+epoch: 4 learning rate:0.1
+Epoch: [  4][  0/115]	Loss 0.2777 (0.2777)	Acc_Iter@1 89.583 (89.583)	
+ *Acc@Video_soft 100.000   *Acc@Frame 94.964 
+ *Acc@Video 90.909 
+epoch: 5 learning rate:0.1
+Epoch: [  5][  0/115]	Loss 0.0751 (0.0751)	Acc_Iter@1 95.833 (95.833)	
+ *Acc@Video_soft 100.000   *Acc@Frame 96.232 
+ *Acc@Video 90.909 
+epoch: 6 learning rate:0.1
+Epoch: [  6][  0/115]	Loss 0.2426 (0.2426)	Acc_Iter@1 91.667 (91.667)	
+ *Acc@Video_soft 100.000   *Acc@Frame 96.558 
+ *Acc@Video 90.909 
